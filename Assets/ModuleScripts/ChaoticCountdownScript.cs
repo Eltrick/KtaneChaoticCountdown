@@ -201,6 +201,7 @@ public class ChaoticCountdownScript : ModuleScript
                 PlaySound(_Module.transform, false, _Sounds[0]);
             }
             _equationsUsed++;
+            _pressedPosition = 13;
             _operatorPressedPosition = 4;
             _isFirstNumberDetermined = false;
         }
@@ -238,14 +239,18 @@ public class ChaoticCountdownScript : ModuleScript
         {
             Log("The time has run out!");
             _Module.HandleStrike();
-            _Numbers[_pressedPosition].color = new Color32(51, 51, 51, 255);
-            _OperatorButtons[_operatorPressedPosition].GetComponentInChildren<TextMesh>().color = new Color32(51, 51, 51, 255);
+            if (_pressedPosition != 13)
+                _Numbers[_pressedPosition].color = new Color32(51, 51, 51, 255);
+            if (_operatorPressedPosition != 4)
+                _OperatorButtons[_operatorPressedPosition].GetComponentInChildren<TextMesh>().color = new Color32(51, 51, 51, 255);
             _isSeedSet = false;
             _AllPermutations.Clear();
             _AllOperations.Clear();
             _pressedPosition = 13;
             _operatorPressedPosition = 4;
             _isFirstNumberDetermined = false;
+            _equationsUsed = 0;
+            _isOperatorAdded = false;
             Start();
             _isTimerActive = false;
         }
